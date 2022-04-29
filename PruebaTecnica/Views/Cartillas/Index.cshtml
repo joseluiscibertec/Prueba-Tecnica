@@ -1,0 +1,44 @@
+﻿@model IEnumerable<PruebaTecnica.Models.Cartilla>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3 class="text-center text-uppercase">lista de cartilla</h3>
+
+<div class="float-right">
+    <a asp-action="Create" class="btn btn-success">Agregar Nuevo</a>
+</div>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Titulo)</th>
+            <th>@Html.DisplayNameFor(model => model.Descripcion)</th>
+            <th>@Html.DisplayNameFor(model => model.Foto)</th>
+            <th>@Html.DisplayNameFor(model => model.TextoBoton)</th>
+            <th>@Html.DisplayNameFor(model => model.Link)</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.Titulo</td>
+            <td>@item.Descripcion</td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">
+                    <img src="@FileLocation.RetriveFileFromFolder@item.Foto" class="img-thumbnail" height="100" width="100" asp-append-version="true" />
+                </a>
+            </td>
+
+            <td>@item.TextoBoton</td>
+            <td>@item.Link</td>
+            <td>
+                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Editar</a>   
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
